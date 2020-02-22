@@ -1,4 +1,5 @@
 import React from 'react';
+import Btn from './Btn';
 
 class Card extends React.Component {
 	constructor(props) {
@@ -16,6 +17,7 @@ class Card extends React.Component {
 				<span>{this.state.name}</span>
 				<h3>{this.props.title}</h3>
 				<p>{this.props.content}</p>
+				<Btn />
 			</div>
 		);
 	}
