@@ -1,18 +1,22 @@
-import React from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-import Card from './Card';
-import AuthControl from './AuthControl';
+function App() {
+	const [user, setUser] = useState({ id: 1, name: 'Rinat' });
 
-const App = () => {
-	const items = [1, 2, 3, 4, 5];
+	// По принципу componentDidMount и componentDidUpdate:
+	useEffect(() => {
+		// Обновляем заголовок документа, используя API браузера
+		document.title = `Вы нажали ${user.name} ${user.job} раз!`;
+	});
+
 	return (
-		<div className="App">
-			<AuthControl />
-			<ul>{items.map(el => <li key={el}>{el}</li>)}</ul>
-			<Card name="Rinat" content="Frontend web developer" />
+		<div>
+			<p>Вы нажали {user.name} {user.job} раз</p>
+			<button onClick={() => setUser({ id: 1, name: 'Rinat', job: 'Frontend web developer' })}>
+				Нажми на меня
+      </button>
 		</div>
 	);
-};
+}
 
 export default App;
