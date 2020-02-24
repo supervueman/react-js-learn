@@ -4,7 +4,9 @@ function IndexPage() {
 	return (
 		<main>
 			<section className="section">
-				<h1>Index page</h1>
+				<div className="container">
+					<h1>Index page</h1>
+				</div>
 			</section>
 		</main>
 	);

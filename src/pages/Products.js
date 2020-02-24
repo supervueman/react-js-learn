@@ -4,7 +4,9 @@ function ProductsPage() {
 	return (
 		<main>
 			<section className="section">
-				<h1>Products page</h1>
+				<div className="container">
+					<h1>Products page</h1>
+				</div>
 			</section>
 		</main>
 	);
