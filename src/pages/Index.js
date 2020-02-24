@@ -1,32 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 //Components
 import Card from '../components/Card';
 
-function IndexPage() {
-
-	const [products, setProducts] = useState([{
-		id: 1,
-		slug: 'book_1',
-		title: 'Book 1'
-	}, {
-		id: 2,
-		slug: 'book_2',
-		title: 'Book 2'
-	}, {
-		id: 3,
-		slug: 'book_3',
-		title: 'Book 3'
-	}]);
+function IndexPage(props) {
+	useEffect(() => {
+		props.onFetchProducts();
+	}, []);
 
 	const [productTitle, setProductTitle] = useState('');
 
-
 	function addProduct(e) {
 		e.preventDefault();
-		const lastId = products[products.length - 1].id;
-		const newId = lastId + 1;
-		setProducts([...products, { id: newId, slug: `book_${newId}`, title: productTitle }]);
+		props.onAddProduct({ id: 8, slug: `book_8`, title: productTitle });
+		setProductTitle('');
 	}
 
 	return (
@@ -35,7 +23,7 @@ function IndexPage() {
 				<div className="container">
 					<h3>{productTitle}</h3>
 					<form onSubmit={e => addProduct(e)}>
-						<input type="text" name="title" onChange={e => setProductTitle(e.target.value)} />
+						<input type="text" name="title" value={productTitle} onChange={e => setProductTitle(e.target.value)} />
 						<button>Add product</button>
 					</form>
 				</div>
@@ -43,12 +31,22 @@ function IndexPage() {
 
 			<section className="section">
 				<div className="container">
-					<h1>Products page</h1>
-					{products.map(el => <Card item={el} key={el.id}></Card>)}
+					<h1>Products</h1>
+					{props.products.map(el => <Card item={el} key={el.id}></Card>)}
 				</div>
 			</section>
 		</main >
 	);
 }
 
-export default IndexPage;
+export default connect(state => ({
+	products: state.products
+}), dispatch => ({
+	onFetchProducts: () => dispatch({
+		type: 'SHOW_ALL_PRODUCTS'
+	}),
+	onAddProduct: product => dispatch({
+		type: 'ADD_PRODUCT',
+		payload: product
+	})
+}))(IndexPage);
