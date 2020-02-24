@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, useParams } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 // Pages
 import HomePage from './pages/Index';
@@ -17,11 +17,11 @@ function App() {
 				<Route exact path="/">
 					<HomePage />
 				</Route>
-				<Route path="/products">
-					<ProductsPage />
-				</Route>
 				<Route path="/products/:slug">
 					<ProductPage />
+				</Route>
+				<Route path="/products">
+					<ProductsPage />
 				</Route>
 			</Switch>
 		</div>
