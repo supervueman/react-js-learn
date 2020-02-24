@@ -1,20 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Switch, Route, useParams } from 'react-router-dom';
+
+// Pages
+import HomePage from './pages/Index';
+import ProductsPage from './pages/Products';
+import ProductPage from './pages/Product';
+
+// Components
+import Toolbar from './components/Toolbar';
 
 function App() {
-	const [user, setUser] = useState({ id: 1, name: 'Rinat' });
-
-	// По принципу componentDidMount и componentDidUpdate:
-	useEffect(() => {
-		// Обновляем заголовок документа, используя API браузера
-		document.title = `Вы нажали ${user.name} ${user.job} раз!`;
-	});
-
 	return (
-		<div>
-			<p>Вы нажали {user.name} {user.job} раз</p>
-			<button onClick={() => setUser({ id: 1, name: 'Rinat', job: 'Frontend web developer' })}>
-				Нажми на меня
-      </button>
+		<div className="app">
+			<Toolbar />
+			<Switch>
+				<Route exact path="/">
+					<HomePage />
+				</Route>
+				<Route path="/products">
+					<ProductsPage />
+				</Route>
+				<Route path="/products/:slug">
+					<ProductPage />
+				</Route>
+			</Switch>
 		</div>
 	);
 }
